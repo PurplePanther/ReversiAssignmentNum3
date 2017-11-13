@@ -74,7 +74,11 @@ void Player::playOneTurn(){
 			if(!std::cin.fail() && this->gameBoard->isValidCell(x.getX()-1, x.getY()-1,this->color)){
 				this->gameBoard->placePiece(this->color, x.getX(), x.getY());
 				acceptablemove = true;
-			}else{
+
+                std::cin.clear(); // reset input, handling situations where input leaks to next play.
+                std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+
+            }else{
 				std::cout << "Error, not a valid move," << std::endl;
 				std::cout << "Please choose one of the valid moves above." << std::endl;
 
