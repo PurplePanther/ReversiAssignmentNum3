@@ -4,6 +4,7 @@
 *Exercise #: 2
 ******************************************/
 
+#include <limits>
 #include "Player.h"
 #include "ReversiBoard.h"
 #include "Cell.h"
@@ -72,9 +73,11 @@ void Player::playOneTurn(){
 				this->gameBoard->placePiece(this->color, x.getX(), x.getY());
 				acceptablemove = true;
 			}else{
-				std::cin.clear();
-				std::cin.ignore();
-				std::cout << "Error, not a valid move." << std::endl;
+				std::cout << "Error, not a valid move," << std::endl;
+				std::cout << "Please choose one of the valid moves above." << std::endl;
+
+				std::cin.clear(); // reset failbit
+				std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); //skip bad input
 
 			}
 		}
