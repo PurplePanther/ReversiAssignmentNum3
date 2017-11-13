@@ -24,7 +24,6 @@ OfflinePlayer::OfflinePlayer(int color): Player(color){
 Cell OfflinePlayer::chooseMove() {
 
 	std::cout << "Please enter your move row col (for example 3 5): ";
-	bool validInput = false;
 	int x, y;
 	std::cin >> x >> y;
 	Cell chosenXY = Cell(x,y);
