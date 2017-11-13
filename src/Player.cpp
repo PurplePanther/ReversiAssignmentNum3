@@ -54,9 +54,11 @@ void Player::playOneTurn(){
 		}
 		std::cout << sign << ": It's your move." << std::endl;
 		std::cout << "Your possible moves: ";
+
+
 		Cell* array = this->gameBoard->possibleMoves(this->color);
 
-		for(int i=0 ; i < (signed) sizeof(array);i++){
+		for(int i=0 ; i < (unsigned) sizeof(array);i++){
 			if(!array[i].isEmpty()){
 			std::cout << array[i];
 			if(!array[i+1].isEmpty()){
@@ -69,7 +71,7 @@ void Player::playOneTurn(){
 		bool acceptablemove = false;
 		while(acceptablemove == false){
 			x = this->chooseMove();
-			if(this->gameBoard->isValidCell(x.getX()-1, x.getY()-1,this->color)){
+			if(!std::cin.fail() && this->gameBoard->isValidCell(x.getX()-1, x.getY()-1,this->color)){
 				this->gameBoard->placePiece(this->color, x.getX(), x.getY());
 				acceptablemove = true;
 			}else{
