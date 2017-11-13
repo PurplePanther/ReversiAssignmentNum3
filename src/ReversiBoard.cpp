@@ -230,24 +230,24 @@ bool ReversiBoard::isFull() const{
  * @return - an array of cells containing the possible move for the input player.
  */
 Cell* ReversiBoard::possibleMoves(const int &sign) const{
-	Cell* array = 	new Cell[8];
+	Cell* array = 	new Cell[20];
 	int counter = 0;
-	int checkSize = 8;
+	int checkSize = 20;
 
 	// going over the entire board looking for possible moves.
 	for (int i = 0; i < this->sizeX; i++) {
 		for (int j = 0; j < this->sizeY; j++) {
 			//checking is cell i,j is playable.
 			if(this->isValidCell(i,j,sign)) {
-				if(counter < checkSize) {
+				if(counter < checkSize - 1) {
 					array[counter] = Cell(i,j);
 					counter++;
 				} else {
-					Cell* temp = new Cell[counter*2];
-					std::copy(array, array + counter, temp);
+                    checkSize *= 2;
+					Cell* temp = new Cell[checkSize];
+					std::copy(array, array + checkSize, temp);
 					delete [] array;
 					array = temp;
-					checkSize*=2;
 				}
 			}
 		}
