@@ -189,9 +189,9 @@ void ReversiBoard::printBoard() const{
 	for (int i = 0; i < this->sizeX ; ++i) {
 		std::cout << i+1 << "|";
 			for (int j = 0; j < this->sizeY; ++j) {
-				if(this->gameBoard[j][i].isEmpty()) {
+				if(this->gameBoard[i][j].isEmpty()) {
 					y = ' ';
-				}else if(this->gameBoard[j][i].getColor() == 1) {
+				}else if(this->gameBoard[i][j].getColor() == 1) {
 					y = 'X';
 				}else{
 					y = 'O';
