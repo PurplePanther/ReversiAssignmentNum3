@@ -5,12 +5,18 @@
 ******************************************/
 
 #include "Game.h"
+#include "Menu.h"
 
 /**
  * the main function.
  * @return - an integer.
  */
 int main(){
+    //choosing gameMode.
+    Menu* mainMenu = new Menu();
+    int gameMode = mainMenu->getGameMode();
+
+
 	Game* reversi = new Game(8,8);
 	reversi->start();
 	delete reversi;
