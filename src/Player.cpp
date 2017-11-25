@@ -46,23 +46,28 @@ void Player::playOneTurn(){
 	Cell x;
 	char sign;
 	//checking if player can move
-	if(this->hasValidMoves()){
-		if(this->color == 1) {
-			sign = 'X';
-		} else {
-			sign = 'O';
-		}
+
+    if(this->color == 1) {
+        sign = 'X';
+    } else {
+        sign = 'O';
+    }
+
+    if(this->hasValidMoves()){
+
 		std::cout << sign << ": It's your move." << std::endl;
 		std::cout << "Your possible moves: ";
 
 
-		Cell* array = this->gameBoard->possibleMoves(this->color);
+		std::vector<Cell> possibleMovesVector = this->gameBoard->possibleMoves(this->color);
+        std::vector<Cell>::iterator it;
+        int i = 0;
+		for(it = possibleMovesVector.begin() ; it != possibleMovesVector.end() ; it++,i++){
 
-		for(int i=0 ; i < (unsigned) sizeof(array);i++){
-			if(!array[i].isEmpty()){
-			std::cout << array[i];
-			if(!array[i+1].isEmpty()){
-			std::cout << ',';
+			if(possibleMovesVector.at(i).isEmpty()){
+                std::cout << possibleMovesVector.at(i);
+			if((it+1) != possibleMovesVector.end()){
+			    std::cout << ',';
 			}
 			}
 		}
@@ -87,7 +92,7 @@ void Player::playOneTurn(){
 
 			}
 		}
-		delete[] array;
+		possibleMovesVector.clear();
 	} else {
 		//player has no valid moves.
 		std::cout << sign << ": It's your move." << std::endl;
@@ -107,14 +112,14 @@ void Player::playOneTurn(){
  * @return - a boolean.
  */
 bool Player::hasValidMoves() {
-	Cell* array;
-	array = this->gameBoard->possibleMoves(this->color);
-	if(array[0].isEmpty()){
-		delete[] array;
-		return false;
-	}else{
-		delete[] array;
+	std::vector<Cell> vector;
+	vector = this->gameBoard->possibleMoves(this->color);
+	if(vector.at(0).isEmpty()){
+		vector.clear();
 		return true;
+	}else{
+        vector.clear();
+		return false;
 	}
 }
 

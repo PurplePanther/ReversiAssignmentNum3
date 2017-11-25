@@ -8,6 +8,7 @@
 #define REVERSIBOARD_H_
 
 //including the object Cell.
+#include <vector>
 #include "Cell.h"
 
 /**
@@ -41,7 +42,7 @@ public:
 	void flipCellsBetween(const Cell &x, const Cell &y);
 
 	//finding all the friendly cells connecting to a specific cell.
-	Cell* connectionsWith(const Cell &x, const int &color);
+	std::vector<Cell> connectionsWith(const Cell &x, const int &color);
 
 	//The function returns the gameBoard.
 	Cell** getBoard() const;
@@ -62,7 +63,7 @@ public:
 	bool isFull() const;
 
 	//The function returns possible moves for certain sign.
-	Cell* possibleMoves(const int &sign) const;
+	std::vector<Cell> possibleMoves(const int &sign) const;
 
 	//The function checks if the cell is playable according to the game rules.
 	bool isValidCell(const int &x, const int &y, const int &sign) const;

@@ -114,17 +114,18 @@ Cell** ReversiBoard::getBoard() const{
  * @param positionY - the Y coordinate.
  */
 void ReversiBoard::placePiece(const int &color,const int &positionX, const int &positionY) {
-	Cell* arrayConnections = connectionsWith(gameBoard[positionX-1][positionY-1],color);
+	std::vector<Cell> vectorConnections = connectionsWith(gameBoard[positionX-1][positionY-1],color);
 
 	this->gameBoard[positionX-1][positionY-1].setColor(color);
 	this->gameBoard[positionX-1][positionY-1].setStatus(true);
-
-	for (int i = 0; i < (signed)sizeof(arrayConnections); i++){
-		if(!arrayConnections[i].isEmpty()){
-			this->flipCellsBetween(gameBoard[positionX-1][positionY-1],arrayConnections[i]);
+    std::vector<Cell>::iterator it;
+    int i = 0;
+	for ( it = vectorConnections.begin(); it != vectorConnections.end(); it++,i++){
+		if(vectorConnections.at(i).isEmpty()){
+			this->flipCellsBetween(gameBoard[positionX-1][positionY-1],vectorConnections.at(i));
 		}
 	}
-	delete[] arrayConnections;
+	vectorConnections.clear();
 }
 
 
@@ -173,21 +174,22 @@ void ReversiBoard::printBoard() const{
 	std::cout << "Current board: " << std::endl;
 	std::cout << std::endl;
 	//printing the row #'s.
-	std::cout << ' ' << "|";
+	std::cout << "  " << "|";
 	for (int i = 1; i <= this->sizeX ; ++i) {
-		std::cout << i << "|";
+		std::cout << i << " | ";
 	}
 	//printing the line separation.
 	std::cout << std::endl;
-	for (int i = 0; i <= this->sizeX ; ++i){
-	std::cout << "--";
+	for (int i = 0; i <= this->sizeX-1; ++i){
+	std::cout << "----";
 	}
+	std::cout << "--";
 	std::cout << std::endl;
 
 
 	char y;
 	for (int i = 0; i < this->sizeX ; ++i) {
-		std::cout << i+1 << "|";
+		std::cout << i+1 << " |";
 			for (int j = 0; j < this->sizeY; ++j) {
 				if(this->gameBoard[i][j].isEmpty()) {
 					y = ' ';
@@ -196,15 +198,16 @@ void ReversiBoard::printBoard() const{
 				}else{
 					y = 'O';
 				}
-				std::cout << y << "|";
+				std::cout << y << " | ";
 			}
 
 		//printing the line separation.
 		std::cout << std::endl;
 
-		for (int i = 0; i <= this->sizeX ; ++i){
-		std::cout << "--";
+		for (int i = 0; i <= this->sizeX-1; ++i){
+		std::cout << "----";
 		}
+		std::cout << "--";
 		std::cout << std::endl;
 		//printing the line separation.
 
@@ -227,33 +230,22 @@ bool ReversiBoard::isFull() const{
 /**
  * The function returns possible moves for certain sign.
  * @param sign - the player's color.
- * @return - an array of cells containing the possible move for the input player.
+ * @return - a vector of cells containing the possible move for the input player.
  */
-Cell* ReversiBoard::possibleMoves(const int &sign) const{
-	Cell* array = 	new Cell[20];
-	int counter = 0;
-	int checkSize = 20;
+std::vector<Cell> ReversiBoard::possibleMoves(const int &sign) const{
+	std::vector<Cell> possibleCells;
 
 	// going over the entire board looking for possible moves.
 	for (int i = 0; i < this->sizeX; i++) {
 		for (int j = 0; j < this->sizeY; j++) {
 			//checking is cell i,j is playable.
-			if(this->isValidCell(i,j,sign)) {
-				if(counter < checkSize - 1) {
-					array[counter] = Cell(i,j);
-					counter++;
-				} else {
-                    checkSize *= 2;
-					Cell* temp = new Cell[checkSize];
-					std::copy(array, array + checkSize, temp);
-					delete [] array;
-					array = temp;
-				}
+			if (this->isValidCell(i, j, sign)) {
+				possibleCells.push_back(Cell(i, j));
+
 			}
 		}
 	}
-
-	return array;
+	return possibleCells;
 }
 
 
@@ -287,7 +279,6 @@ bool ReversiBoard::isValidCell(const int &x, const int &y, const int &sign) cons
 	if(!pointIsValid(x,y)) {
 		return false;
 	}else{
-
 		int currentX = x;
 		int currentY = y;
 		//checking if the cell we are looking at is empty.
@@ -297,7 +288,7 @@ bool ReversiBoard::isValidCell(const int &x, const int &y, const int &sign) cons
 			for (int i = -1; i <= 1 ; ++i){
 				for (int j = -1; j <= 1; ++j){
 					// check if surrounding cells are in the boundaries.
-					if(!pointIsValid(currentX+i,currentY+j)) {
+					if(!pointIsValid(currentX+i,currentY+j) || (i==0 && j==0)) {
 						continue;
 					}
 					//we are making sure the current neighbor cell we are looking at isn't empty.
@@ -369,15 +360,14 @@ ReversiBoard::~ReversiBoard() {
  * @param color - the color of the player we are looking for connections for.
  * @return - an array containing all the connections with the input cell.
  */
-Cell* ReversiBoard::connectionsWith(const Cell &x,const int &color){
+std::vector<Cell> ReversiBoard::connectionsWith(const Cell &x,const int &color){
 
 	//defining an array of cells.
-	Cell* array= new Cell[10];
-	int counter = 0;
+	std::vector<Cell> Connections;
 
 	//checking if the cell is a valid cell.
 	if(!this->isValidCell(x.getX(),x.getY(),color)){
-		return array;
+		return Connections;
 	} else {
 		int currentX = x.getX();
 		int currentY = x.getY();
@@ -389,7 +379,7 @@ Cell* ReversiBoard::connectionsWith(const Cell &x,const int &color){
 			for (int i = -1; i <= 1 ; ++i){
 				for (int j = -1; j <= 1; ++j){
 					// check if surrounding cells are in the boundaries.
-					if(!this->pointIsValid(currentX+i,currentY+j)) {
+					if(!this->pointIsValid(currentX+i,currentY+j) || (i==0 && j==0)) {
 						continue;
 					}
 					//we are making sure the current neighbor cell we are looking at isn't empty.
@@ -421,8 +411,7 @@ Cell* ReversiBoard::connectionsWith(const Cell &x,const int &color){
 						if(!friendlyNeighbor && hasSameSign){
 
 						// this cell can be played.
-						array[counter] = Cell(posX,posY);
-						counter++;
+						Connections.push_back(Cell(posX,posY));
 						} else if (!hasSameSign) {
 							while (!found){
 								posX = posX + i;
@@ -432,8 +421,7 @@ Cell* ReversiBoard::connectionsWith(const Cell &x,const int &color){
 									break;
 								}
 								if(this->gameBoard[posX][posY].getColor() == color) {
-									array[counter] = Cell(posX,posY);
-									counter++;
+									Connections.push_back(Cell(posX,posY));
 								}
 							}
 						}
@@ -442,7 +430,7 @@ Cell* ReversiBoard::connectionsWith(const Cell &x,const int &color){
 			}
 		}
 	}
-	return array;
+	return Connections;
 }
 
 
