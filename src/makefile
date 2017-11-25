@@ -4,13 +4,13 @@
 #Exercise #: 2
 ###########################################
 
-a.out: Cell.o main.o ReversiBoard.o Game.o Player.o OfflinePlayer.o
-	g++ main.o Cell.o ReversiBoard.o Game.o Player.o OfflinePlayer.o
+a.out: Cell.o main.o ReversiBoard.o Game.o Player.o OfflinePlayer.o Menu.o
+	g++ main.o Cell.o ReversiBoard.o Game.o Player.o OfflinePlayer.o Menu.o
 
 Cell.o: Cell.cpp Cell.h
 	g++ -c Cell.cpp
 
-main.o: main.cpp Cell.h ReversiBoard.h Game.h Player.h OfflinePlayer.h
+main.o: main.cpp Game.h Menu.h
 	g++ -c main.cpp
 
 ReversiBoard.o: ReversiBoard.cpp Cell.h
@@ -24,6 +24,9 @@ Player.o: Player.cpp Cell.h ReversiBoard.h
 
 OfflinePlayer.o: OfflinePlayer.cpp Player.h
 	g++ -c OfflinePlayer.cpp	
+
+Menu.o: Menu.cpp
+	g++ -c Menu.cpp
 
 run: a.out
 	./a.out
