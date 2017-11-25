@@ -62,7 +62,7 @@ void Player::playOneTurn(){
 		std::vector<Cell> possibleMovesVector = this->gameBoard->possibleMoves(this->color);
         std::vector<Cell>::iterator it;
         int i = 0;
-		for(it = possibleMovesVector.begin() ; it != possibleMovesVector.end() ; it++,i++){
+		for(it = possibleMovesVector.begin() ; it < possibleMovesVector.end() ; it++,i++){
 
 			if(possibleMovesVector.at(i).isEmpty()){
                 std::cout << possibleMovesVector.at(i);
@@ -104,7 +104,6 @@ void Player::playOneTurn(){
 	this->gameBoard->printBoard();
 	std::cout << sign << " Played" <<"(" << x.getX() <<","<<x.getY() <<")"<<std::endl;
 
-
 }
 
 /**
@@ -114,13 +113,20 @@ void Player::playOneTurn(){
 bool Player::hasValidMoves() {
 	std::vector<Cell> vector;
 	vector = this->gameBoard->possibleMoves(this->color);
+
+	if(vector.empty()){
+		vector.clear();
+		return false;
+	}
+
 	if(vector.at(0).isEmpty()){
 		vector.clear();
 		return true;
-	}else{
-        vector.clear();
-		return false;
 	}
+
+	vector.clear();
+	return false;
+
 }
 
 /**
