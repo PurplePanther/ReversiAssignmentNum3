@@ -22,7 +22,7 @@ ComputerAi::ComputerAi(int color) : Player(color) {
  * @return - a Cell containing the X,Y values of the next move.
  */
 Cell ComputerAi::chooseMove() {
-
+    //defining the variables.
     int x, y;
     Cell possibleMove;
     ReversiBoard* board = this->gameBoard;
@@ -30,8 +30,9 @@ Cell ComputerAi::chooseMove() {
     ReversiBoard* tempBoard;
     ReversiBoard* secondTempBoard;
 
-    int otherPlayersHighScoreMove;
+    int otherPlayersHighScoreMove = MINVALUE;
 
+    //defining the vectors.
     std::vector<Cell> possibleAIMoves = board->possibleMoves(currentplayer);
     std::vector<Cell> possibleEnemyPlayerMoves;
     std::vector<int> rankedEnemyMoves;
@@ -39,25 +40,58 @@ Cell ComputerAi::chooseMove() {
     int i = 0;
     int j = 0;
     int xCounter = 0;
+    //defining iterators.
     std::vector<Cell>::iterator it;
     std::vector<int>::iterator intIt;
     std::vector<Cell>::iterator secondIterator;
 
-    for (it = possibleAIMoves.begin(); it < possibleAIMoves.end(); i++,it++) {
+    //main for loop going over the possible ComputerAi move.
+    for (it = possibleAIMoves.begin(); it != possibleAIMoves.end(); i++,it++) {
         possibleMove = possibleAIMoves.at(i);
+
 
         tempBoard = new ReversiBoard(board->getSizeX(),board->getSizeY());
         tempBoard->copyBoard(board->getBoard());
 
         tempBoard->placePiece(currentplayer, possibleMove.getX()+1,possibleMove.getY()+1);
-        //tempBoard->printBoard();
+
 
         j=0;
         possibleEnemyPlayerMoves = tempBoard->possibleMoves(((currentplayer-1)*-1));
+
+        //if the other player cant move | got not possible plays left.
+        if(possibleEnemyPlayerMoves.size() == 0){
+
+            if(currentplayer == 1){
+
+                if((tempBoard->countOCells() - tempBoard->countXCells()) >
+                   otherPlayersHighScoreMove){
+
+                    otherPlayersHighScoreMove = tempBoard->countOCells() -
+                            tempBoard->countXCells();
+
+                }
+            } else {
+
+                if((tempBoard->countXCells() - tempBoard->countOCells()) >
+                   otherPlayersHighScoreMove){
+
+                    otherPlayersHighScoreMove = tempBoard->countXCells() -
+                            tempBoard->countOCells();
+                }
+            }
+
+            bestOfEnemyMoves.push_back(otherPlayersHighScoreMove);
+            possibleEnemyPlayerMoves.clear();
+            delete[] tempBoard;
+            continue;
+        }
+
+        //if the other player got possible plays.
+        //we go over the possible moves and calculate the best move.
         for ( secondIterator = possibleEnemyPlayerMoves.begin();
               secondIterator != possibleEnemyPlayerMoves.end() ; j++, secondIterator++) {
-
-            otherPlayersHighScoreMove = MINVALUE;
+                     otherPlayersHighScoreMove = MINVALUE;
 
             secondTempBoard = new ReversiBoard(board->getSizeX(),board->getSizeY());
             secondTempBoard->copyBoard(tempBoard->getBoard());
@@ -66,7 +100,6 @@ Cell ComputerAi::chooseMove() {
                     ,possibleEnemyPlayerMoves.at(j).getX()+1
                     ,possibleEnemyPlayerMoves.at(j).getY()+1);
 
-            //secondTempBoard->printBoard();
 
             if(currentplayer == 1){
                 if((secondTempBoard->countOCells() - secondTempBoard->countXCells()) >
@@ -92,8 +125,10 @@ Cell ComputerAi::chooseMove() {
         int placement = 0;
 
         xCounter = 0;
+        //ranking the plays, and adding the score of the best play to a vector.
         for (intIt = rankedEnemyMoves.begin(); intIt != rankedEnemyMoves.end();
              xCounter++,intIt++) {
+
             if (maxVal < rankedEnemyMoves.at(xCounter)) {
                 placement = xCounter;
                 maxVal = rankedEnemyMoves.at(placement);
@@ -111,8 +146,8 @@ Cell ComputerAi::chooseMove() {
     int placement = 0;
     xCounter = 0;
 
+    //ranking the possible Ai plays by the best-worst play of the player. (minimax).
     for (intIt = bestOfEnemyMoves.begin(); intIt != bestOfEnemyMoves.end(); xCounter++,intIt++) {
-
         if (minVal > bestOfEnemyMoves.at(xCounter)) {
             placement = xCounter;
             minVal = bestOfEnemyMoves.at(placement);
@@ -123,7 +158,11 @@ Cell ComputerAi::chooseMove() {
     x = possibleAIMoves.at(placement).getX();
     y = possibleAIMoves.at(placement).getY();
     possibleAIMoves.clear();
+    possibleEnemyPlayerMoves.clear();
     bestOfEnemyMoves.clear();
+    rankedEnemyMoves.clear();
+
+    //returning the Ai cell.
     Cell chosenXY = Cell(x+1,y+1);
     return chosenXY;
 

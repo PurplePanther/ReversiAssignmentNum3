@@ -4,8 +4,8 @@
 #Exercise #: 2
 ###########################################
 
-a.out: Cell.o main.o ReversiBoard.o Game.o Player.o OfflinePlayer.o Menu.o
-	g++ main.o Cell.o ReversiBoard.o Game.o Player.o OfflinePlayer.o Menu.o
+a.out: Cell.o main.o ReversiBoard.o Game.o Player.o OfflinePlayer.o Menu.o ComputerAi.o
+	g++ main.o Cell.o ReversiBoard.o Game.o Player.o OfflinePlayer.o Menu.o ComputerAi.o
 
 Cell.o: Cell.cpp Cell.h
 	g++ -c Cell.cpp
@@ -27,6 +27,9 @@ OfflinePlayer.o: OfflinePlayer.cpp Player.h
 
 Menu.o: Menu.cpp
 	g++ -c Menu.cpp
+
+ComputerAi.o: ComputerAi.cpp Player.h
+	g++ -c ComputerAi.cpp
 
 run: a.out
 	./a.out

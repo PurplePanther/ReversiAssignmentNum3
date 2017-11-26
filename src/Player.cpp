@@ -134,6 +134,10 @@ bool Player::hasValidMoves() {
 
 }
 
+/**
+ * The function sets if the player is an Ai.
+ * @param isAi - a bool containing true if the player is an Ai.
+ */
 void Player::setAi(bool isAi){
 	this->Ai = isAi;
 }
