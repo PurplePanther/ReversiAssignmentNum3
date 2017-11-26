@@ -9,6 +9,7 @@
 #include "ReversiBoard.h"
 #include "Player.h"
 #include "OfflinePlayer.h"
+#include "ComputerAi.h"
 
 /**
  * The constructor method.
@@ -25,7 +26,7 @@ Game::Game(int BoardWidth, int BoardLength) {
  */
 void Game::initialize(){
 	this->playerOne = new OfflinePlayer(1);
-	this->playerTwo = new OfflinePlayer(0);
+	this->playerTwo = new ComputerAi(0);
 
 	this->playerOne->setGameBoard(this->gameBoard);
 	this->playerTwo->setGameBoard(this->gameBoard);

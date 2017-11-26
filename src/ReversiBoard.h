@@ -20,8 +20,14 @@ class ReversiBoard {
 private:
 	//board size X*Y.
 	int sizeX, sizeY;
+public:
+    int getSizeX() const;
 
-	//2D array of Cells.
+    int getSizeY() const;
+
+private:
+
+    //2D array of Cells.
 	Cell** gameBoard;
 
 	void initBoard();
@@ -34,6 +40,9 @@ public:
 
 	//constructor method.
 	ReversiBoard(int x=8,int y=8);
+
+    //constructor method.
+    void copyBoard(Cell** board);
 
 	//destructor method.
 	virtual ~ReversiBoard();
@@ -67,6 +76,8 @@ public:
 
 	//The function checks if the cell is playable according to the game rules.
 	bool isValidCell(const int &x, const int &y, const int &sign) const;
+
+
 };
 
 #endif /* REVERSIBOARD_H_ */

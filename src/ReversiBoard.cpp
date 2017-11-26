@@ -115,7 +115,6 @@ Cell** ReversiBoard::getBoard() const{
  */
 void ReversiBoard::placePiece(const int &color,const int &positionX, const int &positionY) {
 	std::vector<Cell> vectorConnections = connectionsWith(gameBoard[positionX-1][positionY-1],color);
-
 	this->gameBoard[positionX-1][positionY-1].setColor(color);
 	this->gameBoard[positionX-1][positionY-1].setStatus(true);
     std::vector<Cell>::iterator it;
@@ -256,7 +255,6 @@ std::vector<Cell> ReversiBoard::possibleMoves(const int &sign) const{
  * @return - a boolean, true if point is inside the board boundaries.
  */
 bool ReversiBoard::pointIsValid(const int &x, const int &y) const{
-
 	if( x < 0 || y < 0 ||
 			x >= this->sizeX || y >= this->sizeY){
 		return false;
@@ -275,6 +273,7 @@ bool ReversiBoard::pointIsValid(const int &x, const int &y) const{
  * @return - a boolean containing true if cell is playable for the input player.
  */
 bool ReversiBoard::isValidCell(const int &x, const int &y, const int &sign) const{
+
 	//if the cell we are looking for is out of boundaries.
 	if(!pointIsValid(x,y)) {
 		return false;
@@ -365,10 +364,13 @@ std::vector<Cell> ReversiBoard::connectionsWith(const Cell &x,const int &color){
 	//defining an array of cells.
 	std::vector<Cell> Connections;
 
+
 	//checking if the cell is a valid cell.
 	if(!this->isValidCell(x.getX(),x.getY(),color)){
+
 		return Connections;
 	} else {
+
 		int currentX = x.getX();
 		int currentY = x.getY();
 
@@ -432,6 +434,31 @@ std::vector<Cell> ReversiBoard::connectionsWith(const Cell &x,const int &color){
 	}
 	return Connections;
 }
+
+int ReversiBoard::getSizeX() const {
+	return sizeX;
+}
+
+int ReversiBoard::getSizeY() const {
+	return sizeY;
+}
+
+
+void ReversiBoard::copyBoard(Cell** board) {
+	int x,y,color;
+	bool value;
+	for (int i = 0; i < this->sizeX; ++i) {
+		x=i;
+		for (int j = 0; j < this->sizeY; ++j) {
+			y=j;
+			color = board[x][y].getColor();
+			value = board[x][y].isEmpty();
+			this->gameBoard[i][j] = Cell(x,y);
+			this->gameBoard[i][j].setColor(color);
+			this->gameBoard[i][j].setStatus(!value);
+		}
+	}
+	}
 
 
 

@@ -6,8 +6,7 @@
 
 #include <limits>
 #include "Player.h"
-#include "ReversiBoard.h"
-#include "Cell.h"
+
 
 /**
  * the constructor method.
@@ -15,6 +14,7 @@
  */
 Player::Player(int color) {
 	this->color = color;
+	this->Ai = false;
 }
 
 /**
@@ -77,12 +77,15 @@ void Player::playOneTurn(){
 		while(acceptablemove == false){
 			x = this->chooseMove();
 			if(!std::cin.fail() && this->gameBoard->isValidCell(x.getX()-1, x.getY()-1,this->color)){
+
+
 				this->gameBoard->placePiece(this->color, x.getX(), x.getY());
 				acceptablemove = true;
 
-                std::cin.clear(); // reset input, handling situations where input leaks to next play.
-                std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-
+				if(!this->Ai) {
+					std::cin.clear(); // reset input, handling situations where input leaks to next play.
+					std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+				}
             }else{
 				std::cout << "Error, not a valid move," << std::endl;
 				std::cout << "Please choose one of the valid moves above." << std::endl;
@@ -100,6 +103,8 @@ void Player::playOneTurn(){
 				<< std::endl;
 		return;
 	}
+	std::cout << "about to print board "<< std::endl;
+
 	//printing the updated board.
 	this->gameBoard->printBoard();
 	std::cout << sign << " Played" <<"(" << x.getX() <<","<<x.getY() <<")"<<std::endl;
@@ -127,6 +132,10 @@ bool Player::hasValidMoves() {
 	vector.clear();
 	return false;
 
+}
+
+void Player::setAi(bool isAi){
+	this->Ai = isAi;
 }
 
 /**
