@@ -103,7 +103,6 @@ void Player::playOneTurn(){
 				<< std::endl;
 		return;
 	}
-	std::cout << "about to print board "<< std::endl;
 
 	//printing the updated board.
 	this->gameBoard->printBoard();

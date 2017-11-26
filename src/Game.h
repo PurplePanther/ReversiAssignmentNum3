@@ -16,16 +16,18 @@
  */
 class Game {
 private:
+
 	ReversiBoard* gameBoard;
 	Player* playerOne;
 	Player* playerTwo;
+	int gameMode;
 
 	void initialize();
 	bool chooseWinner(bool winCondition);
 	void playOneTurn();
 
 public:
-	Game(int BoardWidth = 8,int BoardLength = 8);
+	Game(int gameMode, int BoardWidth = 8,int BoardLength = 8);
 	virtual ~Game();
 
 	void gameLoop();

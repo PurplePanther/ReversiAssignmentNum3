@@ -27,6 +27,7 @@ Cell ComputerAi::chooseMove() {
     Cell possibleMove;
     ReversiBoard* board = this->gameBoard;
     int currentplayer = this->color;
+
     ReversiBoard* tempBoard;
     ReversiBoard* secondTempBoard;
 
@@ -37,13 +38,15 @@ Cell ComputerAi::chooseMove() {
     std::vector<Cell> possibleEnemyPlayerMoves;
     std::vector<int> rankedEnemyMoves;
     std::vector<int> bestOfEnemyMoves;
-    int i = 0;
-    int j = 0;
-    int xCounter = 0;
+
     //defining iterators.
     std::vector<Cell>::iterator it;
     std::vector<int>::iterator intIt;
     std::vector<Cell>::iterator secondIterator;
+
+    int i = 0;
+    int j = 0;
+    int xCounter = 0;
 
     //main for loop going over the possible ComputerAi move.
     for (it = possibleAIMoves.begin(); it != possibleAIMoves.end(); i++,it++) {
@@ -83,7 +86,7 @@ Cell ComputerAi::chooseMove() {
 
             bestOfEnemyMoves.push_back(otherPlayersHighScoreMove);
             possibleEnemyPlayerMoves.clear();
-            delete[] tempBoard;
+            delete tempBoard;
             continue;
         }
 
@@ -138,6 +141,7 @@ Cell ComputerAi::chooseMove() {
         rankedEnemyMoves.clear();
         possibleEnemyPlayerMoves.clear();
         delete tempBoard;
+
 
     }
 

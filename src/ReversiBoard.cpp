@@ -435,15 +435,26 @@ std::vector<Cell> ReversiBoard::connectionsWith(const Cell &x,const int &color){
 	return Connections;
 }
 
+/**
+ * the function returns the x size of the board.
+ * @return - an integer.
+ */
 int ReversiBoard::getSizeX() const {
 	return sizeX;
 }
 
+/**
+ * the function returns the x size of the board.
+ * @return - an integer.
+ */
 int ReversiBoard::getSizeY() const {
 	return sizeY;
 }
 
-
+/**
+ * the function copies a cell board.
+ * @param board - the board we want to copy.
+ */
 void ReversiBoard::copyBoard(Cell** board) {
 	int x,y,color;
 	bool value;

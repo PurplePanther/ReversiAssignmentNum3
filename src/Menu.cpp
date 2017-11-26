@@ -44,11 +44,10 @@ void Menu::chooseGameMode(){
             "";
 
     std::cout << coolLogo << std::endl;
-    std::cout << "Coded & Developed by Tal & Natali" << std::endl;
+    std::cout << "Coded & Developed by Tal & Natalie" << std::endl;
     std::cout << "Please choose one of the game modes below:" << std::endl;
-    std::cout << "(1) Offline" << std::endl;
-    std::cout << "(2) Play against the computer" << std::endl;
-    std::cout << "(3) Play Online | Multiplayer" << std::endl;
+    std::cout << "(1) Play against another Player Offline" << std::endl;
+    std::cout << "(2) Play against the Computer | Ai" << std::endl;
 
     std::cout << std::endl;
 
