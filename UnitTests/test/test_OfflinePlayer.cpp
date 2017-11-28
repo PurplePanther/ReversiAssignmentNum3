@@ -8,7 +8,7 @@
 //Checking if the OfflinePlayer's Constructor works properly.
 TEST(OfflinePlayerTest,checkConstructor){
 	OfflinePlayer test= OfflinePlayer(1);
-	EXPECT_EQ(test.color,1);
+	EXPECT_EQ(test.getColor(),1);
 }
 //Checking correct inputs for the chooseMove function.
 TEST(OfflinePlayerTest,checkChooseMove){
