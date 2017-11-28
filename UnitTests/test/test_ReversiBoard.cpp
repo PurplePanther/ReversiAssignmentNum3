@@ -1,6 +1,7 @@
 
 #include "gtest/gtest.h"
 #include "ReversiBoard.h"
+#include "Cell.h"
 
 //Testing the constructor method of ReversiBoard.
 TEST(ReversiBoardTest, checkConstructor) {
