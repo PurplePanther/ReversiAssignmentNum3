@@ -1,3 +1,9 @@
+/******************************************
+*Student name: Tal Pogorelis
+*Student ID: 318225349
+*Exercise #: 2
+******************************************/
+
 #ifndef CELL_H_
 #define CELL_H_
 #include <iostream>
@@ -22,7 +28,6 @@ public:
 
 	//second constructor method.
 	Cell(int x, int y);
-
 
 	//get Cell's X value.
 	int getX() const;

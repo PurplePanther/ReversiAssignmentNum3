@@ -1,3 +1,9 @@
+/******************************************
+*Student name: Tal Pogorelis
+*Student ID: 318225349
+*Exercise #: 2
+******************************************/
+
 #ifndef PLAYER_H_
 #define PLAYER_H_
 #include "ReversiBoard.h"

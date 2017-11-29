@@ -1,3 +1,9 @@
+/******************************************
+*Student name: Tal Pogorelis
+*Student ID: 318225349
+*Exercise #: 2
+******************************************/
+
 #include "Cell.h"
 
 /**
@@ -104,3 +110,5 @@ std::ostream &operator <<(std::ostream& out,const Cell &cell) {
 	out << "(" << cell.x + 1 << ","<< cell.y + 1 << ")";
 	return out;
 }
+
+

@@ -1,3 +1,9 @@
+/******************************************
+*Student name: Tal Pogorelis
+*Student ID: 318225349
+*Exercise #: 2
+******************************************/
+
 #include "ReversiBoard.h"
 #include <iostream>
 
@@ -464,3 +470,7 @@ void ReversiBoard::copyBoard(Cell** board) {
 		}
 	}
 	}
+
+
+
+

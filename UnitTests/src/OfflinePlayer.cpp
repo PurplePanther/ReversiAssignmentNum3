@@ -1,3 +1,9 @@
+/******************************************
+*Student name: Tal Pogorelis
+*Student ID: 318225349
+*Exercise #: 2
+******************************************/
+
 #include "OfflinePlayer.h"
 #include <iostream>
 #include <limits>
@@ -24,3 +30,5 @@ Cell OfflinePlayer::chooseMove() {
 	return chosenXY;
 
 }
+
+

@@ -1,3 +1,10 @@
+/******************************************
+*Student name: Tal Pogorelis
+*Student ID: 318225349
+*Exercise #: 2
+******************************************/
+
+
 #include "ComputerAi.h"
 #define MINVALUE -599
 
@@ -11,7 +18,7 @@ ComputerAi::ComputerAi(int color) : Player(color) {
 
 
 /**
- * The function computes the Ai's next move.
+ * The function computes the Ai's next move by playing in the memory. (using minimax)
  * @return - a Cell containing the X,Y values of the next move.
  */
 Cell ComputerAi::chooseMove() {
@@ -164,4 +171,3 @@ Cell ComputerAi::chooseMove() {
     return chosenXY;
 
 }
-
