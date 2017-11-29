@@ -1,8 +1,3 @@
-/******************************************
-*Student name: Tal Pogorelis
-*Student ID: 318225349
-*Exercise #: 2
-******************************************/
 
 #include <iostream>
 #include "Menu.h"

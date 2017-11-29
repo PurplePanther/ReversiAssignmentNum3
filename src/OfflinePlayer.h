@@ -1,8 +1,3 @@
-/******************************************
-*Student name: Tal Pogorelis
-*Student ID: 318225349
-*Exercise #: 2
-******************************************/
 
 #ifndef OFFLINEPLAYER_H_
 #define OFFLINEPLAYER_H_

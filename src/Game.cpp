@@ -1,12 +1,5 @@
-/******************************************
-*Student name: Tal Pogorelis
-*Student ID: 318225349
-*Exercise #: 2
-******************************************/
+
 #include "Game.h"
-#include <iostream>
-#include "ReversiBoard.h"
-#include "Player.h"
 #include "OfflinePlayer.h"
 #include "ComputerAi.h"
 

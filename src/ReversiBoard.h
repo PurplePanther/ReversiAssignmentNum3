@@ -1,8 +1,3 @@
-/******************************************
-*Student name: Tal Pogorelis
-*Student ID: 318225349
-*Exercise #: 2
-******************************************/
 
 #ifndef REVERSIBOARD_H_
 #define REVERSIBOARD_H_
@@ -20,10 +15,6 @@ class ReversiBoard {
 private:
 	//board size X*Y.
 	int sizeX, sizeY;
-public:
-    int getSizeX() const;
-
-    int getSizeY() const;
 
 private:
 
@@ -77,6 +68,11 @@ public:
 	//The function checks if the cell is playable according to the game rules.
 	bool isValidCell(const int &x, const int &y, const int &sign) const;
 
+	//The function returns the length of the Board.
+	int getSizeX() const;
+
+	//The function returns the Height of the Board.
+	int getSizeY() const;
 
 };
 
