@@ -1,9 +1,3 @@
-/******************************************
-*Student name: Tal Pogorelis
-*Student ID: 318225349
-*Exercise #: 2
-******************************************/
-
 
 #include "ComputerAi.h"
 #define MINVALUE -599
