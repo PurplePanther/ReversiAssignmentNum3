@@ -20,13 +20,18 @@ Game::Game(int gameMode, int BoardWidth, int BoardLength) {
  * The init method, the function initializes the game.
  */
 void Game::initialize(){
-	this->playerOne = new OfflinePlayer(1);
 
-    if(this->gameMode == 1) {
-        this->playerTwo = new OfflinePlayer(0);
-    } else {
-        this->playerTwo = new ComputerAi(0);
-    }
+	if(this->gameMode != 3) {
+		this->playerOne = new OfflinePlayer(1);
+		if (this->gameMode == 1) {
+			this->playerTwo = new OfflinePlayer(0);
+		} else {
+			this->playerTwo = new ComputerAi(0);
+		}
+	}
+
+
+
 	this->playerOne->setGameBoard(this->gameBoard);
 	this->playerTwo->setGameBoard(this->gameBoard);
 
