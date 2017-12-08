@@ -1,7 +1,9 @@
 
 #include "OfflinePlayer.h"
-#include <iostream>
 #include <limits>
+
+
+using namespace std;
 
 /**
  * The constructor method.
@@ -11,6 +13,7 @@ OfflinePlayer::OfflinePlayer(int color): Player(color){
 	// TODO Auto-generated constructor stub
 
 }
+
 
 /**
  * The function lets the player choose his next move.

@@ -7,8 +7,10 @@
  * the offlinePlayer class.
  */
 class OfflinePlayer : public Player {
+
 public:
 	OfflinePlayer(int color);
+	OfflinePlayer(const char *serverIP, int serverPort);
 	virtual Cell chooseMove();
 };
 

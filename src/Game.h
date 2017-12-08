@@ -5,6 +5,7 @@
 #include "Game.h"
 #include "ReversiBoard.h"
 #include "Player.h"
+#include "Client.h"
 
 /**
  * The game class, this class contains the game logic.
@@ -21,6 +22,9 @@ private:
 	bool chooseWinner(bool winCondition);
 	void playOneTurn();
 
+	Client* gameClient;
+
+	void connectToServer();
 public:
 	Game(int gameMode, int BoardWidth = 8,int BoardLength = 8);
 	virtual ~Game();

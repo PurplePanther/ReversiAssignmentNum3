@@ -1,6 +1,5 @@
 
 #include "ReversiBoard.h"
-#include <iostream>
 
 /**
  * the constructor method.
@@ -16,6 +15,8 @@ ReversiBoard::ReversiBoard(int x, int y) {
 	for(int i = 0; i < x; ++i) {
 		this->gameBoard[i] = new Cell[y];
 	}
+
+	this->lastPlay = Cell(-1,-1);
 
 	//initializing board to default state.
 	initBoard();
@@ -465,6 +466,22 @@ void ReversiBoard::copyBoard(Cell** board) {
 		}
 	}
 	}
+
+/**
+ * The function returns the last played cell.
+ * @return - a cell.
+ */
+const Cell &ReversiBoard::getLastPlay() const {
+	return lastPlay;
+}
+
+/**
+ * The function sets the last played cell.
+ * @param lastPlay - the last placed cell.
+ */
+void ReversiBoard::setLastPlay(Cell lastPlay) {
+	ReversiBoard::lastPlay = lastPlay;
+}
 
 
 
