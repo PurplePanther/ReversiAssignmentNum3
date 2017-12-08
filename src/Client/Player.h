@@ -12,18 +12,15 @@ protected:
 	ReversiBoard* gameBoard;
 	int color;
 	bool Ai;
-public:
-	bool isRemote() const;
+    bool Remote;
 
-protected:
-	bool Remote;
 
 public:
 	Player(int color);
 	virtual ~Player();
 	int getColor() const;
 	int getScore() const;
-
+    bool isRemote() const;
     virtual void playOneTurn();
 	void setGameBoard(ReversiBoard* board);
 	bool hasValidMoves();

@@ -96,16 +96,6 @@ Cell Client::readCellFromServer() const{
 }
 
 /**
- * the function writes an integer to the game server.
- * @param num - the integer we are willing to send to the server.
- */
-void Client::writeIntToServer(const int num) const{
-
-    int n = write(this->clientSocket, &num,sizeof(num));
-
-}
-
-/**
  * the function writes a cell to the game server.
  * @param Cellx - the cell we are willing to send to the server.
  */
@@ -120,7 +110,7 @@ void Client::writeCellToServer(const Cell Cellx) const{
  */
 void Client::readSettingsFromFile() {
     std::ifstream settingsFile;
-    settingsFile.open("settings.txt");
+    settingsFile.open("ClientSettings.txt");
     std::string placeHolder;
     if (settingsFile.is_open()) {
         char* serverIP;

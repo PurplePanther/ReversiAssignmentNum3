@@ -32,9 +32,6 @@ public:
     //the function reads a cell from the server.
     Cell readCellFromServer() const;
 
-    //the function sends an integer to the game server.
-    void writeIntToServer(const int num) const;
-
     //the function sends a cell to the game server.
     void writeCellToServer(const Cell CellX) const;
 };

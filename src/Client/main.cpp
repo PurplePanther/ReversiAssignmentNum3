@@ -11,7 +11,7 @@ int main(){
     Menu* mainMenu = new Menu();
     int gameMode = mainMenu->getGameMode();
 
-	Game* reversi = new Game(gameMode,4,4);
+	Game* reversi = new Game(gameMode);
 	reversi->start();
 
 	delete reversi;
