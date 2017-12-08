@@ -1,3 +1,3 @@
 # ReversiAssignmentNum3
-Adding AI
-the AI will be using minimax.
++ option to play against remote player was added
++ added game server

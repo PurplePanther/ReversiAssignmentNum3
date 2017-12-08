@@ -10,6 +10,7 @@
 Player::Player(int color) {
 	this->color = color;
 	this->Ai = false;
+    this->Remote = false;
 }
 
 /**
@@ -96,6 +97,9 @@ void Player::playOneTurn(){
 		std::cout << sign << ": It's your move." << std::endl;
 		std::cout << "No possible Moves. Play passes back to the other player."
 				<< std::endl;
+
+		//setting the last placed piece.
+		this->gameBoard->setLastPlay(Cell(-2,-2));
 		return;
 	}
 
@@ -103,6 +107,8 @@ void Player::playOneTurn(){
 	this->gameBoard->printBoard();
 	std::cout << sign << " Played" <<"(" << x.getX() <<","<<x.getY() <<")"<<std::endl;
 
+    //setting the last placed piece.
+    this->gameBoard->setLastPlay(x);
 }
 
 /**
@@ -136,6 +142,7 @@ void Player::setAi(bool isAi){
 	this->Ai = isAi;
 }
 
+
 /**
  * setting the game board.
  * @param board - the game board.
@@ -149,4 +156,12 @@ void Player::setGameBoard(ReversiBoard* board){
  */
 Player::~Player() {
 	// TODO Auto-generated destructor stub
+}
+
+void Player::setRemote(bool Remote) {
+	Player::Remote = Remote;
+}
+
+bool Player::isRemote() const {
+	return Remote;
 }

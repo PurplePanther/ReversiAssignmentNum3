@@ -7,6 +7,7 @@
  * the offlinePlayer class.
  */
 class OfflinePlayer : public Player {
+
 public:
 	OfflinePlayer(int color);
 	virtual Cell chooseMove();

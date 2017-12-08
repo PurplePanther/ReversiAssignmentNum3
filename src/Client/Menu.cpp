@@ -1,5 +1,6 @@
 
 #include <iostream>
+#include <limits>
 #include "Menu.h"
 
 /**
@@ -43,11 +44,28 @@ void Menu::chooseGameMode(){
     std::cout << "Please choose one of the game modes below:" << std::endl;
     std::cout << "(1) Play against another Player Offline" << std::endl;
     std::cout << "(2) Play against the Computer | Ai" << std::endl;
+    std::cout << "(3) Play Online Against A Remote Player" << std::endl;
 
     std::cout << std::endl;
 
     std::cout << "I would like to play: ";
     std::cin >> this->gameMode;
+
+    //making sure input is a valid choice.
+    bool validChoice = false;
+    while(!validChoice){
+        if(this->gameMode < 0 || this->gameMode > 3){
+            std::cout << "Option is Unavailable, Please choose another option"<< std::endl;
+            std::cout << "I would like to play: ";
+            std::cin >> this->gameMode;
+            std::cin.clear(); // reset input, handling situations where input leaks to next play.
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+        } else{
+            validChoice = true;
+            std::cin.clear(); // reset input, handling situations where input leaks to next play.
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+        }
+    }
 
 
 }

@@ -16,9 +16,10 @@ private:
 	//board size X*Y.
 	int sizeX, sizeY;
 
-private:
+	//last played Cell.
+	Cell lastPlay;
 
-    //2D array of Cells.
+	//2D array of Cells.
 	Cell** gameBoard;
 
 	void initBoard();
@@ -73,6 +74,12 @@ public:
 
 	//The function returns the Height of the Board.
 	int getSizeY() const;
+
+	//the function returns the last play.
+	const Cell &getLastPlay() const;
+
+	//the function sets the last play.
+	void setLastPlay(Cell lastPlay);
 
 };
 
