@@ -93,4 +93,25 @@ TEST(ReversiBoardTest, checkPossibleMoves){
 
 }
 
+//Testing the board getLastPlay and  setLastPlay method.
+TEST(ReversiBoardTest, getAndSetLastPlay){
+	ReversiBoard test = ReversiBoard(4,4);
+	Cell testCell= Cell(0,0);
+	testCell=test.getLastPlay();
+	EXPECT_EQ(testCell.getX(),-1);
+	EXPECT_EQ(testCell.getY(),-1);
+	
+	Cell setCell= Cell(2,2);
+	test.setLastPlay(setCell);
+	testCell=test.getLastPlay();
+	EXPECT_EQ(testCell.getX(),2);
+	EXPECT_EQ(testCell.getY(),2);
+	
+	Cell setCell2= Cell(1,3);
+	test.setLastPlay(setCell);
+	testCell=test.getLastPlay();
+	EXPECT_EQ(testCell.getX(),1);
+	EXPECT_EQ(testCell.getY(),3);
+}
+
 
